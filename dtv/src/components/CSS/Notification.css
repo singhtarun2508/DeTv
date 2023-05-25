@@ -1,0 +1,9 @@
+.notification {
+    color: azure;
+    margin-left: 15%;
+    padding-top: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: underline;
+    font-family: cursive;
+}

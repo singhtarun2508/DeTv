@@ -1,0 +1,138 @@
+.videopage {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.topline {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.myVideo {
+  margin-left: 5%;
+  margin-top: 2%;
+  width: 60%;
+  height: 500px;
+  border: solid rgb(27, 27, 27);
+  background-color: #232424;
+  z-index: 9;
+  border-radius: 20px;
+}
+
+.actualVideo {
+  object-fit: cover;
+}
+
+.videoList {
+  margin-top: 2%;
+  margin-right: 5%;
+  width: 25%;
+  background-color: transparent;
+  height: 100%;
+}
+
+.VideoCardWrapper {
+  background-color: #272525;
+  padding: 0px;
+  width: 100%;
+  height: 6rem;
+  margin: 0px 0px 10px 0px;
+  border-radius: 10px;
+  border: solid #1d1b1b
+}
+
+.videotiles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.thumbnailtile {
+  padding: 1px;
+  margin: 5px;
+  border: solid black;
+  border-radius: 10px;
+  overflow: hidden;
+  max-width: 150px;
+
+}
+
+.myvideocard {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.tiledetail {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 5px;
+}
+
+.tiletitle {
+  font-weight: bold;
+  color: aliceblue;
+}
+
+.tilechannel {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 11px;
+  font-weight: 100;
+  word-break: break-word;
+  color: azure
+}
+
+.tilevideo {
+  object-fit: cover;
+  object-position: center center;
+}
+
+.myHomeLogo {
+  border: solid black;
+  height: 37px;
+  width: 37px;
+  border-radius: 20px;
+}
+
+.detailWrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+}
+
+.myVideotitle {
+  color: aliceblue;
+  font-size: 24px;
+  font-weight: bold;
+  word-break: break-word;
+  margin: 0px 10px 8px 0px;
+}
+
+.myVideochannel {
+  color: aliceblue;
+  font-size: 15px;
+  word-break: break-word;
+  margin-left: 10px;
+}
+
+.myVideodesc {
+  word-break: break-word;
+  font-size: 14px;
+  color: antiquewhite;
+  margin-top: 5px;
+}
+
+.author {
+  font-size: 13px;
+}
+
+.rewardbutton {
+  color: white;
+  font-size: large;
+  font-weight: bold;
+  background-color: rgb(6, 34, 175);
+  border-radius: 10px;
+  border-radius: solid white;
+}

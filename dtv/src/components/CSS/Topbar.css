@@ -1,0 +1,161 @@
+.topbar {
+  background-color: #181818;
+  height: 50px;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  width: 100%;
+  overflow: hidden;
+}
+
+.topbarwrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.logoitemwrapper {
+  display: flex;
+  align-items: center;
+  margin-left: 8px;
+  text-decoration: none;
+
+}
+
+.homelogo {
+  border: solid black;
+  height: 37px;
+  width: 37px;
+  border-radius: 20px;
+}
+
+.logotext {
+  margin: 0px 5px 0px 10px;
+  font-size: larger;
+  color: aliceblue;
+  font-weight: bold;
+}
+
+.topbaritem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.searchbar {
+  border-radius: 20px;
+  width: 40vw;
+  height: 35px;
+}
+
+.searchlogo {
+  height: 30px;
+  width: 30px;
+  border-radius: 20px;
+  margin-left: 6px;
+  border: solid white;
+  background-color: aliceblue;
+}
+
+.icon {
+  margin: 10px;
+  height: 30px;
+  width: 30px;
+  margin-left: 8px;
+  z-index: 999999999999999999;
+}
+
+.iconwrapper {
+  margin-right: 30px;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.createicon {
+  margin-right: 40px;
+}
+
+input[type=text] {
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+.additionalETH {
+  top: 0;
+  left: 50%;
+  z-index: 9999;
+  width: 70px;
+  height: 70px;
+  opacity: 0.2;
+}
+
+.additionalDBTC {
+  top: 0;
+  left: 10%;
+  z-index: 9999;
+  opacity: 0.2;
+}
+
+.additionalCOIN {
+  top: 0;
+  left: 5%;
+  z-index: 9999;
+  opacity: 0.2;
+}
+
+.additionalDOLLAR {
+  top: 0;
+  left: 70%;
+  z-index: 9999;
+  opacity: 0.4;
+  height: 40px;
+  width: 40px;
+}
+
+.additionalCHAIN {
+  top: 0;
+  left: 40%;
+  z-index: 9999;
+  opacity: 0.1;
+  height: 70px;
+  width: 70px;
+}
+
+.additionalV3 {
+  top: 0;
+  left: 85%;
+  z-index: 9999;
+  opacity: 0.3;
+  height: 70px;
+  width: 70px;
+}
+
+.additionalV2 {
+  top: 0;
+  left: 90%;
+  z-index: 9999;
+  opacity: 0.1;
+  height: 70px;
+  width: 70px;
+}
+
+.additionalV1 {
+  top: 0;
+  left: 60%;
+  z-index: 9999;
+  opacity: 0.1;
+  height: 70px;
+  width: 70px;
+}
+
+.centerdiv {
+  position: fixed;
+  top: 0;
+  width: 79%;
+  height: 50px;
+  background-color: transparent;
+  z-index: 99999;
+  margin-left: 7.5%;
+  overflow: hidden;
+}

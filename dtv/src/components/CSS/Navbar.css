@@ -1,0 +1,26 @@
+.navbar {
+  position: fixed;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 12%;
+  overflow-y: scroll;
+  height: 100vh;
+  background-color: #181818;
+}
+
+.navbarItem {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: aliceblue;
+  border: solid #222020;
+  background-color: rgb(53, 52, 52);
+  border-radius: 7px;
+  margin-bottom: 1px;
+}
+
+.navbar::-webkit-scrollbar {
+  display: none;
+}
