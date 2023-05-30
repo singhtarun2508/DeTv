@@ -3,13 +3,16 @@ import web3context from "./web3context";
 import { useState } from "react";
 import loadProvider from '../Connection';
 import contract from "../contracts/Dtv.json"
-import Error from "../components/Error";
+import { useNavigate } from "react-router-dom";
 import dotenv from 'dotenv'
 dotenv.config()
 
 const Web3state = (props) => {
+    const navigate= useNavigate()
     const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
     const [connection, setConnection] = useState(false)
+    const [address, setaddress] = useState("")
+    const [login, setlogin] = useState("")
     const [web3API, setWeb3API] = useState({
         web3: null,
         contract: null
@@ -25,7 +28,8 @@ const Web3state = (props) => {
             })
             setConnection(true)
         } catch (error) {
-            return <Error />
+            console.log(error)
+            navigate('/error')
         }
     }
 
@@ -52,15 +56,21 @@ const Web3state = (props) => {
         return data;
     }
 
-    const getUserData = async (_tag) => {
+    const getMyData = async () => {
         const addresses = await web3API.web3.eth.getAccounts();
-        const address = addresses[0];
-        const data = await web3API.contract.methods.getUserVideos(address).call();
+        setaddress(addresses[0]);
+        const data = await web3API.contract.methods.getUserVideos(addresses[0]).call();
         return data;
     }
 
+    const getUserData = async (_address) => {
+        const data = await web3API.contract.methods.getUserVideos(_address).call();
+        return data;
+    }
+
+
     return (
-        <web3context.Provider value={{ connection, connect, getData, getUserData, pushVideo, reward, getCategoryData }}>
+        <web3context.Provider value={{ connection, connect, getData, getUserData,getMyData, pushVideo, reward, getCategoryData ,address}}>
             {props.children}
         </web3context.Provider>
     )

@@ -22,8 +22,8 @@
 }
 
 .myCard:hover {
-  transform: scale(1.05);
-  transition: 0.5s;
+  transform: scale(1.01);
+  transition: 0.05s;
   z-index: 2;
 }
 
@@ -36,11 +36,13 @@
 }
 
 .title {
-  color: aliceblue;
+  color: #d1d5dd;
   margin-left: 7px;
   margin-bottom: 3px;
   font-size: 14px;
   font-weight: bold;
+  padding-right: 20px;
+
 }
 
 .tagwrapper {
@@ -55,17 +57,22 @@
   border-radius: 8px;
   padding-right: 20px;
   font-weight: 150;
+  font-family: serif;
 }
 
 .channelname {
-  color: aliceblue;
+  color: #959595;
   margin-right: 20px;
   margin-left: 5px;
   margin-top: 2px;
-  font-size: small;
+  font-size: 10px;
   font-weight: 8;
   word-break: break-word;
   padding-right: 10px;
+}
+
+.channelname:hover {
+  color: #d1d5dd;
 }
 
 
@@ -81,7 +88,6 @@
 }
 
 .channellogo {
-  border: solid black;
   height: 37px;
   width: 37px;
   border-radius: 20px;
@@ -128,18 +134,23 @@
   margin: 5px;
 }
 
+.Next:not(:disabled):hover,
+.Previous:not(:disabled):hover {
+  transform: scale(1.05);
+  transition: 0.05s;
+}
+
+
 button:disabled,
 button[disabled] {
   opacity: 0.4;
-  cursor: not-allowed
+  cursor: not-allowed;
 }
 
 .buttoncontainer {
-  position: fixed;
   width: 100%;
   display: flex;
   justify-content: space-evenly;
-  position: sticky;
   bottom: 0;
 }
 
@@ -149,4 +160,46 @@ button[disabled] {
   bottom: 0;
   justify-content: space-evenly;
   width: 85%;
+}
+
+.yourProfile {
+  color: azure;
+  margin-left: 25px;
+  margin-bottom: 0px;
+  padding-top: 20px;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: underline;
+  font-family: 'Courier New', Courier, monospace;
+  width: 100%;
+}
+
+.userProfile {
+  color: #d1d5dd;
+  margin-left: 25px;
+  margin-bottom: 0px;
+  padding-top: 20px;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: underline;
+  font-family: 'Courier New', Courier, monospace;
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.block{
+  display: none;
+}
+
+.userchannellogo {
+  height: 37px;
+  width: 37px;
+  border-radius: 20px;
+  margin-left: 8px;
+  margin-right: 20px;
+}
+
+.userchannelname{
+  margin-bottom: 10px;
 }

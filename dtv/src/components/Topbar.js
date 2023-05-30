@@ -60,7 +60,7 @@ export default function Topbar() {
                         <Link to="/notification">
                             <img className='icon' src={notification} alt='notification' />
                         </Link>
-                        <Link to="/profile">
+                        <Link to="/profile/myprofile">
                             <img className='icon' src={profile} alt='profile' />
                         </Link>
                     </div>

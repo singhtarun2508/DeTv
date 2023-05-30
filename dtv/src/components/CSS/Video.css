@@ -56,6 +56,8 @@
   border-radius: 10px;
   overflow: hidden;
   max-width: 150px;
+  min-width: 149px;
+  max-height: 82px;
 
 }
 
@@ -81,7 +83,11 @@
   font-size: 11px;
   font-weight: 100;
   word-break: break-word;
-  color: azure
+  color: #959595;
+}
+.tilechannel:hover{
+  color: #d1d5dd;
+
 }
 
 .tilevideo {
@@ -132,7 +138,7 @@
   color: white;
   font-size: large;
   font-weight: bold;
-  background-color: rgb(6, 34, 175);
+  background-color: #54565e;
   border-radius: 10px;
-  border-radius: solid white;
+  border: solid gray;
 }

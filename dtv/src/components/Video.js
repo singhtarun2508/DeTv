@@ -1,12 +1,15 @@
 import React from 'react'
 import { useEffect, useState, useContext } from 'react'
 import { Link, useParams } from 'react-router-dom';
-import ytlogo from '../media/ytlogo.png'
 import web3context from '../Context/web3context';
 import './CSS/Video.css'
+import { AvatarGenerator } from 'random-avatar-generator';
+
 
 export default function Video() {
   let { uri } = useParams();
+  const generator = new AvatarGenerator();
+
   const [myVideoTitle, setmyVideoTitle] = useState("")
   const [myVideoDesc, setmyVideoDesc] = useState("")
   const [myVideoChannel, setmyVideoChannel] = useState("")
@@ -32,21 +35,7 @@ export default function Video() {
       }
     }
     trial()
-  }, [connection])
-
-  const newTrial = async () => {
-    if (connection) {
-      const temp = await getData();
-      setVideoHash(`https://detv.infura-ipfs.io/ipfs/${temp[uri - 1].hash}`)
-      setmyVideoChannel(temp[uri - 1].author)
-      setmyVideoTitle(temp[uri - 1].title)
-      setmyVideoDesc(temp[uri - 1].description)
-      const tag = (temp[uri - 1].tag)
-      const finalArray = await getCategoryData(tag);
-      setTagArray(finalArray.map((item) => temp[item - 1]));
-      window.location.reload()
-    }
-  }
+  }, [connection,uri])
 
   return (
     <>
@@ -66,15 +55,16 @@ export default function Video() {
           </div>
           <div className="detailWrapper">
             <div className="myChannelLogo">
-              <img className=' myHomeLogo' src={ytlogo} alt='logo' />
+            <Link to={`/user/${myVideoChannel}`}><img className=' myHomeLogo' src={generator.generateRandomAvatar(myVideoChannel)} alt='logo' /></Link>
             </div>
             <div className="myVideoDetails">
-
+            <Link to={`/user/${myVideoChannel}`}>
               <div className="myVideochannel">
                 {myVideoChannel}
                 <br />
                 <div className="author"> Author</div>
               </div>
+              </Link>
             </div>
           </div>
           <div className="myVideodesc">
@@ -84,20 +74,22 @@ export default function Video() {
         <div className='videoList'>
           {tagArray.slice(num, num + 8).map((elem) => {
             return (
-              <Link onClick={() => { newTrial(); }} key={elem.id} to={`/video/${elem.id}`}>
+              <Link key={elem.id} to={`/video/${elem.id}`}>
                 <div className='videotiles' >
                   <div className='VideoCardWrapper'>
                     <div className='myvideocard'>
                       <div className="thumbnailtile">
-                        <video className='tilevideo' src={`https://detv.infura-ipfs.io/ipfs/${elem.hash}`} width="100%" height="100%" preload='none' />
+                        <video className='tilevideo' src={`https://detv.infura-ipfs.io/ipfs/${elem.hash}`} width="100%" height="100%" preload='' />
                       </div>
                       <div className="tiledetail">
                         <div className="tiletitle">
                           {`${(elem.title).length > 30 ? (elem.title).slice(0, 30).concat("...") : (elem.title)}`}
                         </div>
+                        <Link to={`/user/${elem.author}`}>
                         <div className="tilechannel">
                           {elem.author}
                         </div>
+                          </Link>
                       </div>
                     </div>
                   </div>

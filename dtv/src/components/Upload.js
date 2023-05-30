@@ -26,7 +26,7 @@ export default function Upload() {
   const context = useContext(web3context)
   const { pushVideo } = context
   const [inp, setInp] = useState("")
-  const [loading, setLoading] = useState(false)
+  const [uploading, setUploading] = useState(false)
   const [tag, setTag] = useState("")
   const [desc, setDesc] = useState("")
   const [titlePrompt, setTitlePrompt] = useState("")
@@ -35,6 +35,7 @@ export default function Upload() {
   const [hide, setHide] = useState("hide")
   const [buffer, setBuffer] = useState(null)
   const [title, setTitle] = useState("")
+  const [generating, setGenerating] = useState(false)
 
   const converter = event => {
     setInp(event.target.value)
@@ -89,15 +90,16 @@ export default function Upload() {
 
   const uploadVideo = (e) => {
     e.preventDefault();
-    setLoading(true)
+    setUploading(true)
     client.add(Buffer.from(buffer), async (error, result) => {
       if (error) {
         console.log(error)
       }
       await pushVideo(result[0].path, title, desc, tag)
-      setLoading(false)
+      setUploading(false)
+      alert("Video Uploaded")
+      resetForm();
     })
-    resetForm();
   }
 
   const helpfromai = () => {
@@ -112,7 +114,7 @@ export default function Upload() {
   }
 
   const genTitle = async () => {
-    setLoading(true)
+    setGenerating(true)
     const prompt = generatePrompt(titlePrompt, "title")
     try {
       if (!prompt) {
@@ -130,7 +132,7 @@ export default function Upload() {
         throw data.error || new Error(`Request failed with status ${response.status}`);
       }
       setTitle(data.result)
-      setLoading(false)
+      setGenerating(false)
     } catch (error) {
       //implementing error handling logic here
       console.error(error);
@@ -139,7 +141,7 @@ export default function Upload() {
   }
 
   const genDesc = async () => {
-    setLoading(true)
+    setGenerating(true)
     const prompt = generatePrompt(descPrompt, "description")
     try {
       if (!prompt) {
@@ -157,7 +159,7 @@ export default function Upload() {
         throw data.error || new Error(`Request failed with status ${response.status}`);
       }
       setDesc(data.result)
-      setLoading(false)
+      setGenerating(false)
     } catch (error) {
       // implementing error handling logic here
       console.error(error);
@@ -167,8 +169,9 @@ export default function Upload() {
 
   return (
     <>
-      {loading && <Spinner message="Loading..." src={godzilla} />}
-      <div className="uploadpagewrapper" style={{ opacity: loading ? "0.1" : "1" }}>
+      {uploading && <Spinner message="Uploading..." src={godzilla} />}
+      {generating && <Spinner message="Generating Response..." src={godzilla} />}
+      <div className="uploadpagewrapper" style={{ opacity: uploading || generating ? "0.1" : "1" }}>
         <div className='upload'>
           <div className='uploadwrapper'>
             <form onSubmit={uploadVideo}>
@@ -181,67 +184,67 @@ export default function Upload() {
                 <textarea id="videoDesc" type="text" className="desc" placeholder="Description" onChange={changeDesc} value={desc} required />
               </div>
               <div className="titlewrapper">
-                <div className="radio">
-                  <input checked={tag === "education"} onChange={tagChange} className='radiotag' type="radio" id="html" name="tag" value="education" required />
+                <div className={`radio ${tag === 'education' ? 'selected' : ''}`}>
+                  <input checked={tag === "education"} onChange={tagChange} className='radiotag' type="radio" name="tag" value="education" required />
                   <label htmlFor="html">Education</label>
                 </div>
-                <div className="radio">
-                  <input checked={tag === "comedy"} onChange={tagChange} className='radiotag' type="radio" id="css" name="tag" value="comedy" />
+                <div className={`radio ${tag === 'comedy' ? 'selected' : ''}`}>
+                  <input checked={tag === "comedy"} onChange={tagChange} className='radiotag' type="radio" name="tag" value="comedy" />
                   <label htmlFor="css">Comedy</label>
-                </div><div className="radio">
-                  <input checked={tag === "kids"} onChange={tagChange} className='radiotag' type="radio" id="javascript" name="tag" value="kids" />
+                </div><div className={`radio ${tag === 'kids' ? 'selected' : ''}`}>
+                  <input checked={tag === "kids"} onChange={tagChange} className='radiotag' type="radio" name="tag" value="kids" />
                   <label htmlFor="javascript">Kids</label>
                 </div>
                 <br />
-                <div className="radio">
-                  <input checked={tag === "action"} onChange={tagChange} className='radiotag' type="radio" id="html" name="tag" value="action" />
+                <div className={`radio ${tag === 'action' ? 'selected' : ''}`}>
+                  <input checked={tag === "action"} onChange={tagChange} className='radiotag' type="radio" name="tag" value="action" />
                   <label htmlFor="html">Action</label>
-                </div><div className="radio">
-                  <input checked={tag === "music"} onChange={tagChange} className='radiotag' type="radio" id="css" name="tag" value="music" />
+                </div><div className={`radio ${tag === 'music' ? 'selected' : ''}`}>
+                  <input checked={tag === "music"} onChange={tagChange} className='radiotag' type="radio" name="tag" value="music" />
                   <label htmlFor="css">Music</label>
-                </div><div className="radio">
-                  <input checked={tag === "games"} onChange={tagChange} className='radiotag' type="radio" id="javascript" name="tag" value="games" />
+                </div><div className={`radio ${tag === 'games' ? 'selected' : ''}`}>
+                  <input checked={tag === "games"} onChange={tagChange} className='radiotag' type="radio" name="tag" value="games" />
                   <label htmlFor="javascript">Games</label>
                 </div>
                 <br />
-                <div className="radio">
-                  <input checked={tag === "romance"} onChange={tagChange} className='radiotag' type="radio" id="html" name="tag" value="romance" />
+                <div className={`radio ${tag === 'romance' ? 'selected' : ''}`}>
+                  <input checked={tag === "romance"} onChange={tagChange} className='radiotag' type="radio" name="tag" value="romance" />
                   <label htmlFor="html">Romance</label>
-                </div><div className="radio">
-                  <input checked={tag === "adventure"} onChange={tagChange} className='radiotag' type="radio" id="css" name="tag" value="adventure" />
+                </div><div className={`radio ${tag === 'adventure' ? 'selected' : ''}`}>
+                  <input checked={tag === "adventure"} onChange={tagChange} className='radiotag' type="radio" name="tag" value="adventure" />
                   <label htmlFor="css">Adventure</label>
-                </div><div className="radio">
-                  <input checked={tag === "horror"} onChange={tagChange} className='radiotag' type="radio" id="javascript" name="tag" value="horror" />
+                </div><div className={`radio ${tag === 'horror' ? 'selected' : ''}`}>
+                  <input checked={tag === "horror"} onChange={tagChange} className='radiotag' type="radio" name="tag" value="horror" />
                   <label htmlFor="javascript">Horror</label>
                 </div>
                 <br />
-                <div className="radio">
-                  <input checked={tag === "programming"} onChange={tagChange} className='radiotag' type="radio" id="html" name="tag" value="programming" />
+                <div className={`radio ${tag === 'programming' ? 'selected' : ''}`}>
+                  <input checked={tag === "programming"} onChange={tagChange} className='radiotag' type="radio" name="tag" value="programming" />
                   <label htmlFor="html">Programming</label>
-                </div><div className="radio">
-                  <input checked={tag === "news"} onChange={tagChange} className='radiotag' type="radio" id="css" name="tag" value="news" />
+                </div><div className={`radio ${tag === 'news' ? 'selected' : ''}`}>
+                  <input checked={tag === "news"} onChange={tagChange} className='radiotag' type="radio" name="tag" value="news" />
                   <label htmlFor="css">News</label>
-                </div><div className="radio">
-                  <input checked={tag === "science"} onChange={tagChange} className='radiotag' type="radio" id="javascript" name="tag" value="science" />
+                </div><div className={`radio ${tag === 'science' ? 'selected' : ''}`}>
+                  <input checked={tag === "science"} onChange={tagChange} className='radiotag' type="radio" name="tag" value="science" />
                   <label htmlFor="javascript">Science</label>
                 </div>
                 <br />
-                <div className="radio">
-                  <input checked={tag === "facts"} onChange={tagChange} className='radiotag' type="radio" id="html" name="tag" value="facts" />
+                <div className={`radio ${tag === 'facts' ? 'selected' : ''}`}>
+                  <input checked={tag === "facts"} onChange={tagChange} className='radiotag' type="radio" name="tag" value="facts" />
                   <label htmlFor="html">Facts</label>
-                </div><div className="radio">
-                  <input checked={tag === "sports"} onChange={tagChange} className='radiotag' type="radio" id="css" name="tag" value="sports" />
+                </div><div className={`radio ${tag === 'sports' ? 'selected' : ''}`}>
+                  <input checked={tag === "sports"} onChange={tagChange} className='radiotag' type="radio" name="tag" value="sports" />
                   <label htmlFor="css">Sports</label>
-                </div><div className="radio">
-                  <input checked={tag === "thoughts"} onChange={tagChange} className='radiotag' type="radio" id="javascript" name="tag" value="thoughts" />
+                </div><div className={`radio ${tag === 'thoughts' ? 'selected' : ''}`}>
+                  <input checked={tag === "thoughts"} onChange={tagChange} className='radiotag' type="radio" name="tag" value="thoughts" />
                   <label htmlFor="javascript">Thoughts</label>
                 </div>
                 <br />
-                <div className="radio">
-                  <input checked={tag === "culture"} onChange={tagChange} className='radiotag' type="radio" id="html" name="tag" value="culture" />
-                  <label htmlFor="html">Culture</label>
-                </div><div className="radio">
-                  <input checked={tag === "others"} onChange={tagChange} className='radiotag' type="radio" id="css" name="tag" value="others" />
+                <div className={`radio ${tag === 'nature' ? 'selected' : ''}`}>
+                  <input checked={tag === "nature"} onChange={tagChange} className='radiotag' type="radio" name="tag" value="nature" />
+                  <label htmlFor="html">Nature</label>
+                </div><div className={`radio ${tag === 'others' ? 'selected' : ''}`}>
+                  <input checked={tag === "others"} onChange={tagChange} className='radiotag' type="radio" name="tag" value="others" />
                   <label htmlFor="css">Others</label>
                 </div>
               </div>
@@ -261,7 +264,7 @@ export default function Upload() {
           <button className='chatbutton' onClick={genTitle}>Generate Title</button>
           <div className="chatdescwrapper">
             <div className='generator'>Description Generator</div>
-            <textarea onChange={getDesc} id="videoTitle" type="text" className="desc" placeholder="A brief Description please" required />
+            <textarea onChange={getDesc} id="videoTitle" type="text" className="desc" placeholder="Provide your video Title" required />
           </div>
           <button className='chatbutton' onClick={genDesc}>Generate Desc</button>
         </div>
